@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6de6e6d0-0415-40ef-9157-0fd203a573f8">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nama_pengirim" class="java.lang.String"/>
+	<parameter name="jumlah_order" class="java.lang.String"/>
+	<parameter name="jumlah_new_order" class="java.lang.String"/>
+	<parameter name="jumlah_invoiced_order" class="java.lang.String"/>
+	<parameter name="jumlah_shipped_order" class="java.lang.String"/>
+	<parameter name="jumlah_completed_order" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     barang.`nama_barang` AS barang_nama_barang,
+     barang.`Harga` AS barang_Harga,
+     barang.`Kualitas` AS barang_Kualitas,
+     barang.`stok_barang` AS barang_stok_barang,
+     customer.`nama_customer` AS customer_nama_customer,
+     customer.`Alamat` AS customer_Alamat,
+     customer.`Telp` AS customer_Telp,
+     detail_order.`tanggal_order` AS detail_order_tanggal_order,
+     detail_order.`kd_barang` AS detail_order_kd_barang,
+     detail_order.`jumlah_barang` AS detail_order_jumlah_barang,
+     detail_order.`total_harga` AS detail_order_total_harga,
+     header_order.`id_customer` AS header_order_id_customer,
+     header_order.`id_user_sales` AS header_order_id_user_sales,
+     header_order.`id_user_gudang` AS header_order_id_user_gudang,
+     header_order.`total_penjualan` AS header_order_total_penjualan,
+     header_order.`tanggal_bayar` AS header_order_tanggal_bayar,
+     header_order.`status_order` AS header_order_status_order,
+     users.`id_users` AS users_id_users,
+     users.`nama_users` AS users_nama_users,
+     users.`Username` AS users_Username,
+     users.`Password` AS users_Password,
+     users.`Status` AS users_Status,
+     users.`last_login` AS users_last_login,
+     header_order.`no_order` AS header_order_no_order,
+     customer.`id_customer` AS customer_id_customer,
+     barang.`kd_barang` AS barang_kd_barang,
+     detail_order.`no_order` AS detail_order_no_order,
+     detail_order.`id_customer` AS detail_order_id_customer
+FROM
+     `barang` barang,
+     `customer` customer,
+     `detail_order` detail_order,
+     `header_order` header_order,
+     `users` users
+GROUP BY
+header_order_no_order
+ORDER BY
+header_order_status_order DESC,
+detail_order_tanggal_order DESC]]>
+	</queryString>
+	<field name="barang_nama_barang" class="java.lang.String"/>
+	<field name="barang_Harga" class="java.lang.Integer"/>
+	<field name="barang_Kualitas" class="java.lang.Float"/>
+	<field name="barang_stok_barang" class="java.lang.Integer"/>
+	<field name="customer_nama_customer" class="java.lang.String"/>
+	<field name="customer_Alamat" class="java.lang.String"/>
+	<field name="customer_Telp" class="java.lang.String"/>
+	<field name="detail_order_tanggal_order" class="java.sql.Timestamp"/>
+	<field name="detail_order_kd_barang" class="java.lang.String"/>
+	<field name="detail_order_jumlah_barang" class="java.lang.Integer"/>
+	<field name="detail_order_total_harga" class="java.lang.Integer"/>
+	<field name="header_order_id_customer" class="java.lang.Integer"/>
+	<field name="header_order_id_user_sales" class="java.lang.Integer"/>
+	<field name="header_order_id_user_gudang" class="java.lang.Integer"/>
+	<field name="header_order_total_penjualan" class="java.lang.Integer"/>
+	<field name="header_order_tanggal_bayar" class="java.sql.Timestamp"/>
+	<field name="header_order_status_order" class="java.lang.String"/>
+	<field name="users_id_users" class="java.lang.Integer"/>
+	<field name="users_nama_users" class="java.lang.String"/>
+	<field name="users_Username" class="java.lang.String"/>
+	<field name="users_Password" class="java.lang.String"/>
+	<field name="users_Status" class="java.lang.String"/>
+	<field name="users_last_login" class="java.sql.Timestamp"/>
+	<field name="header_order_no_order" class="java.lang.Integer"/>
+	<field name="customer_id_customer" class="java.lang.Integer"/>
+	<field name="barang_kd_barang" class="java.lang.String"/>
+	<field name="detail_order_no_order" class="java.lang.Integer"/>
+	<field name="detail_order_id_customer" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="560c12b4-0e29-4c45-91d7-cab47d9e36f3" x="0" y="18" width="555" height="50"/>
+				<textElement textAlignment="Center">
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="099623ce-5d64-4d76-81d5-5451e2c6b1c2" x="471" y="0" width="84" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement uuid="4d0e0c19-dbe6-4818-9bc3-b95fe59a6920" x="455" y="20" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<line>
+				<reportElement uuid="5225f031-92da-419a-8988-ad713d7f8fb3" x="0" y="5" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="0" y="9" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tanggal Order]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5225f031-92da-419a-8988-ad713d7f8fb3" x="0" y="31" width="555" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="112" y="9" width="55" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No Order]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="197" y="9" width="129" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nama Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="338" y="9" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Harga Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="455" y="9" width="66" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement uuid="c91d62a5-1482-49e6-b007-ad34814f68e6" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{detail_order_tanggal_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b27bee5d-3c10-422e-a4fe-1e535c0ee413" x="112" y="0" width="55" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{header_order_no_order}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="00795a7d-f082-460b-85b6-fe36cc0c5d35" x="197" y="0" width="129" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customer_nama_customer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="549c2ebb-b0ff-43c8-8637-63388d4d4f95" x="338" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{detail_order_total_harga}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e0c52d57-1988-4f1d-afba-b046031d0d08" x="455" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{header_order_status_order}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="0" y="5" width="103" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Seluruh Order :]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="5225f031-92da-419a-8988-ad713d7f8fb3" x="0" y="4" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="ee44dcbb-be10-4def-9513-8c0ced78c280" x="112" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{jumlah_order}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="12" y="10" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[New Order]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="07e01c00-d6b7-41d0-b3d7-d987fc1f2cb2" x="12" y="34" width="110" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{jumlah_new_order}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="154" y="10" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Invoiced Order]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="fd2f1ac4-5fcb-4e39-9168-8ed9e1a6a1e7" x="154" y="34" width="120" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{jumlah_invoiced_order}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="305" y="10" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Shipped Order]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="c29d2902-365b-43d7-8a70-4b56a0d52b6f" x="305" y="34" width="120" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{jumlah_shipped_order}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c7c34900-34ab-44ea-aa24-0736a1abf215" x="438" y="10" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Completed]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="60254add-367f-41ef-acb8-889f11952aa7" x="438" y="34" width="141" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$P{jumlah_completed_order}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
